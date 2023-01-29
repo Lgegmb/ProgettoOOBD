@@ -1,7 +1,6 @@
 drop schema mtl cascade;
 create schema mtl;
 
---create table mtl.author
 create table mtl.author
 (
     CodAuthor serial
@@ -10,16 +9,15 @@ create table mtl.author
     LName     varchar(20)
 );
 
--- create table mtl.series
 create table mtl.series
 (
     ISSN_S  issn primary key,
     Curator names,
     Edition int,
-    Code_S  varchar(10),
+    Code_S  varchar(10) unique,
     Name_S  names
 );
---create table mtl.magazine
+
 create table mtl.magazine
 (
     ISSN_M            issn primary key,
@@ -33,12 +31,11 @@ create table mtl.magazine
 );
 
 
---create table mtl.book
 create table mtl.book
 (
     Doi_B            doi
         primary key,
-    ISBN_B           varchar(13)
+    ISBN_B           isbn
         unique,
     PublishingHouse  names,
     Language         names,
@@ -57,14 +54,12 @@ create table mtl.book
     constraint BookFK_3 foreign key (FK_Series) references mtl.Series (ISSN_S) on delete set null
 );
 
---create table mtl.article
 create table mtl.article
 (
     Doi_A           doi
         primary key,
     Title           varchar(40),
     AccessMode      access,
-    YearRelease     timestamp,
     Editor          names,
     Topic           names,
     ReleaseDate     timestamp,

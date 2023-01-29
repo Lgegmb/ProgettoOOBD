@@ -1,57 +1,87 @@
 package Model;
 
+/**
+ * The type Author.
+ */
 public class Author {
-    private String name;
-    private String surname;
-    private String email;
-    private String affiliation;
-    private String doi_A;
+    private String codauthor;
+    private String fName;
+    private String lName;
 
-    public Author(String name, String surname, String email, String affiliation, String doi_A) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.affiliation = affiliation;
-        this.doi_A = doi_A;
+
+    /**
+     * Instantiates a new Author.
+     *
+     * @param authorID the author id
+     * @param fName    the f name
+     * @param lName    the l name
+     */
+    public Author(String authorID, String fName, String lName) {
+        this.codauthor = authorID;
+        this.fName = fName;
+        this.lName = lName;
     }
 
-    public String getName() {
-        return name;
+    /**
+     * Gets author id.
+     *
+     * @return the author id
+     */
+    public String getAuthorID() {
+        return codauthor;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    /**
+     * Sets email.
+     *
+     * @param authorID the author id
+     */
+    public void setEmail(String authorID) {
+        this.codauthor = authorID;
     }
 
-    public String getSurname() {
-        return surname;
+    /**
+     * Gets f name.
+     *
+     * @return the f name
+     */
+    public String getFName() {
+        return fName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    /**
+     * Sets f name.
+     *
+     * @param fName the f name
+     */
+    public void setFName(String fName) {
+        this.fName = fName;
     }
 
-    public String getEmail() {
-        return email;
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
+    public String getlName() {
+        return lName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    /**
+     * Sets name.
+     *
+     * @param lName the l name
+     */
+    public void setlName(String lName) {
+        this.lName = lName;
     }
 
-    public String getAffiliation() {
-        return affiliation;
-    }
-
-    public void setAffiliation(String affiliation) {
-        this.affiliation = affiliation;
-    }
-
-    public String getDoi_A() {
-        return doi_A;
-    }
-
-    public void setDoi_A(String doi_A) {
-        this.doi_A = doi_A;
+    @Override
+    public String toString() {
+        return "Author{" +
+                "codAuthor='" + codauthor + '\'' +
+                ", fName='" + fName + '\'' +
+                ", lName='" + lName + '\'' +
+                '}';
     }
 }

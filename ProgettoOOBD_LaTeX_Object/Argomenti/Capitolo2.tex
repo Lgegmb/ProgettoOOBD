@@ -1,0 +1,61 @@
+\chapter{Progettazione concettuale}
+    \section{Class Diagram del dominio del problema}
+    	\begin{figure}[hbt]
+  			\includegraphics[width=1\textwidth]{/Users/lorenzotecchia/Documents/ESAMI/ProgettoOOBD/ProgettoOOBD_LaTeX_Object/Immagini/ClassDiagramDP.png}
+  			\caption{Class Diagram del dominio del problema}
+	\end{figure}
+    \newpage
+    \begin{table}[]
+\section{Dizionario delle Classi}
+\caption{Dizionario delle Classi}
+
+\label{tab:DizionarioClassi}
+
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{762DC3} 
+Classe &
+  Spiegazione &
+  Attributi \\ \hline
+\textbf{Author} &
+  Autore di libri o articoli &
+  \begin{tabular}[c]{@{}l@{}}ID\_Author (Serial): Author's identification code. \\ FName (String): Author's first  name. \\ LName (String): Author's last name.\end{tabular} \\ \hline
+\textbf{Books} &
+  \begin{tabular}[c]{@{}l@{}}Oggetti leggibili, romanzi o \\ d'educazione\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}DOI(String): Digital object Identifier of the book. \\ ISBN (Integer): Numerical classification sequence of the book. \\ Edition (Integer): Edition number. \\ AccessMode (AccessMode): Fruition method. \\ ReleaseDate (Date): Publication date. \\ PublishingHouse (String): Publishing house that printed the book. \\ ReleaseLocation (String): Place of  publication of the book. \\ Language (String): Language in which the book is written. Title (String): Book title. \\ Argument (String): Book topic. \\ Reprint (Boolean): Parameter that identifies if the book is a reprint or not. \\ PresentationName (String): Name of  presentation in which books are presented.\end{tabular} \\ \hline
+\textbf{Series} &
+  Insieme di libri &
+  \begin{tabular}[c]{@{}l@{}}ISSN (String):International number that identifies serial publications.\\ Edition (Integer):Edition number. \\ Curator (String):Curator of the series. \\ Code (Serial):Code assigned to the series. \\ Name (String): Series' name.\end{tabular} \\ \hline
+\textbf{Magazine} &
+  Insieme di Articoli &
+  \begin{tabular}[c]{@{}l@{}}(Integer): International number that identifies serial publications. \\ Name (String): Magazine's name. \\ Argument (String): Magazine topic. \\ Manager (String): Event organizer. \\ YearRelease (Date): Publication year. \\ PublicationPeriod (String): Periodicity of publication. \\ AccessMode (AccessMode): Fruition method.\end{tabular} \\ \hline
+\textbf{Article} &
+  Articoli di ricerca Scientifica &
+  \begin{tabular}[c]{@{}l@{}}DOI (String): Digital object Identifier of the book.\\ Title (String): Book title.\\ AccessMode (AccessMode): Fruition method. \\ YearRelease (Date):Publication year. \\ Editor (String):Article editor. \\ ReleaseDate (Date):Publication date.\\ ReleaseLocation (String):Place of publication of the book.\\ ConferenceName (String): Name of presentation in which books are presented.\end{tabular} \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+
+    \begin{table}
+\section{Dizionario delle associazioni}
+\centering
+\caption{Tabella delle Associazioni}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{|l|l|l|}    
+\hline
+\rowcolor[HTML]{762DC3} \multicolumn{1}{|r|}{Nome} & Descrizione                                                                                                                            & Classi Coinvolte  \\
+composes/is\_composed                                        & \begin{tabular}[c]{@{}l@{}}Una collana è composta da uno o più libri/\\ Un libro può comporre oppure no una collana\end{tabular}       & Series/Book       \\ 
+\hline
+writes/is\_written                                           & \begin{tabular}[c]{@{}l@{}}Un libro è scritto da uno o più autori/\\ Un autore scrive molti oppure nessun libro\end{tabular}           & Book/Author       \\ 
+\hline
+is\_written/writes                                           & \begin{tabular}[c]{@{}l@{}}Un autore scrive molti oppure nessun articolo/\\ Un articolo è scritto da uno o più autori\end{tabular}     & Author/Article    \\ 
+\hline
+composes/is\_composed                                        & \begin{tabular}[c]{@{}l@{}}Un articolo puo comporre oppure no una rivista/\\ Una rivista è composta da uno o più articoli\end{tabular} & Article/Magazine  \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+        

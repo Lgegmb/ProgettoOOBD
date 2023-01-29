@@ -1,0 +1,14 @@
+\chapter{Descrizione e Analisi del Progetto}
+
+\section{Descrizione e risoluzione sintetica}
+
+	Il progetto consiste in una base di dati relazionale unito ad un'interfaccia grafica costruita in Java per la gestione di una libreria digitale. Si è pensato di implementare una base di dati relazionali con server in locale tramite il dialetto PostgreSQL.\\
+	
+	
+	Si è pensato di articolare la base dati in cinque classi di oggetti per tenere traccia di articoli, libri, autori, collane e riviste. \\ 
+	
+	E' stato messo in risalto il tracciamento per autori e argomenti tramite l'utilizzo di viste.\\ 
+	
+	Si è pensato di controllare gli inserimento delle tuple nel database tramite implementazioni di trigger e domini che controllano ad ogni inserimento la validità degli elementi caratteristici degli oggetti consumabili all'interno della biblioteca, quali ISBN e ISSN per libri e collane rispettivamente. Per articoli e riviste vengono controllati gli inserimenti corretti di DOI e ISSN rispettivamente. \\
+	
+	Tutti i tipi di codici menzionati sono stati scelti come vincoli di chiavi primarie per i rispettivi oggetti.

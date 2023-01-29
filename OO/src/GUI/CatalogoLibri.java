@@ -1,88 +1,73 @@
 package GUI;
 
-import Database.ConnessioneDatabase;
-
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import DAO.BibliographyDAO;
+import DAO.BookDAO;
+import Database.ConnessioneDatabase;
 
 public class CatalogoLibri {
     private JPanel panel1;
-    private JList list1;
-    private JList list2;
-    private JList list3;
+    private JTextField textField1;
+    private JComboBox comboBox1;
+    private JButton cercaButton;
+    private JScrollBar scrollBar1;
+    private JList<Model.Book> list1;
 
     public CatalogoLibri() {
+        addElements();
         JFrame frame = new JFrame("CatalogoLibri");
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
 
-        ArrayList<String> libri_title = new ArrayList<String>();
-        ArrayList<String> libri_author = new ArrayList<String>();
-        ArrayList<String> libri_genre = new ArrayList<String>();
-
-
-        // Sostituire "username" e "password" con le credenziali di accesso al database
-        String url = "jdbc:postgresql://localhost:5432/postgres";
-        String user = "postgres";
-        String password = "0000";
-
-        try {
-            // Carica il driver JDBC
-            Class.forName("org.postgresql.Driver");
-            // Crea una connessione al database
-
-            // Apri la connessione al database
-            Connection conn = DriverManager.getConnection(url, user, password);
-
-            // Esegue la query di selezione delle password
-            String query = "SELECT * FROM mtl.book";
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
-
-            DefaultListModel<String> listModel_1 = new DefaultListModel<String>();
-            DefaultListModel<String> listModel_2 = new DefaultListModel<String>();
-            DefaultListModel<String> listModel_3 = new DefaultListModel<String>();
-
-            // Aggiunge le password al ArrayList
-            while (rs.next()) {
-                libri_title.add(rs.getString("title"));
-                libri_author.add(rs.getString("author"));
-                libri_genre.add(rs.getString("argument"));
+        cercaButton.addActionListener(new ActionListener() {
+            /**
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ricercaLibro();
             }
-
-            for (String s : libri_title) {
-                listModel_1.addElement(s);
-            }
-//            for (String s : libri_author) {
-//                listModel_2.addElement(s);
-//            }
-//
-//            for (String s : libri_genre) {
-//                listModel_3.addElement(s);
-//            }
-
-            list1.setModel(listModel_1);
-//            list2.setModel(listModel_2);
-//            list3.setModel(listModel_3);
-
-            //add a scollable pane
-            JScrollPane scrollPane = new JScrollPane(list1);
-            panel1.add(scrollPane);
-
-            // Chiude la connessione al database
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        });
     }
 
-    public static void main(String[] args){
+    private void ricercaLibro(){
+        String query="Select * FROM libro where ";
+        String selezione=comboBox1.getSelectedItem().toString();
+        String scritto=textField1.getText();
+        query=query.concat(selezione);
+        query=query.concat("='");
+        query=query.concat(scritto);
+        query=query.concat("';");
+        System.out.println(query);
+
+    }
+
+    //add elements to the Jlist
+    private void addElements(){
+        DefaultListModel<Model.Book> model = new DefaultListModel<>();
+        try {
+            Connection connection = ConnessioneDatabase.getInstance().connection;
+            BibliographyDAO bibliographyDAO = new BibliographyDAO(connection);
+            ArrayList listaLibri = bibliographyDAO.readAllBibliography();
+            model.addAll(listaLibri);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        list1.setModel(model);
+    }
+
+    public static void main(String[] args) {
         new CatalogoLibri();
+
     }
 }

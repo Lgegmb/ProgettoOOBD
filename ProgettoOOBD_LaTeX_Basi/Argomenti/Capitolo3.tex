@@ -1,0 +1,47 @@
+\chapter{Schema logico}
+	\section{Spiegazione Schema Logico}
+	Il seguente schema logico riassume la composizione del database, evidenziando le chiavi primarie (in grassetto) e le chiavi esterne per il collegamento di una tabella con l'altra (sottolineate).
+																			
+\begin{itemize}
+\subsection{Schema}
+
+\item Author
+
+
+(\textbf{IDAuthor}, FName, LName)
+
+
+
+
+\item Book
+
+
+(\textbf{DOI\_B}, ISBN, PublishingHouse, Language, AccessMode, Title, Argument, Reprint, Edition, ReleaseDate, ReleaseLocation, PresentationName, \underline{FK\_Author}, \underline{FK\_Series})\\
+
+	$FK\_Author \rightarrow Author(IDAuthor)\\
+	 FK\_Series \rightarrow Series(ISSN\_S)$
+
+
+\item Article
+
+(\textbf{DOI\_A} , Title, AccessMode, YearRelease, Editor, Topic, ReleaseDate, ReleaseLocatione, ConferenceName , \underline{FK\_Author}, \underline{FK\_Magazine})\\
+
+$FK\_Author \rightarrow Author(IDAuthor) \\
+	 FK\_Magazine \rightarrow Series(ISSN\_M)$
+
+\item Series
+
+
+(\textbf{ISSN\_S}, Curator. Edition, Code, Name)\\
+
+
+
+\item Magazine
+
+
+(\textbf{ISSN\_M}, Name , Argument, Manager, YearRelease, PublicationPeriod, AccessMode,
+PublishingHouse)
+
+
+
+\end{itemize}

@@ -4,9 +4,9 @@ from mtl.book b join mtl.author a on b.fk_author = a.codauthor
 order by b.releasedate desc;
 
 create view mtl.history as
-select distinct a.fname, a.lname, ar.title,ar.yearrelease,ar.editor
+select distinct a.fname, a.lname, ar.title,ar.releasedate,ar.editor
 from mtl.author a join mtl.article ar on a.codauthor = ar.fk_author
-order by ar.yearrelease desc;
+order by ar.releasedate desc;
 
 create view mtl.digital_goods as
 select distinct b.title from mtl.book b where accessmode = 'Digital'

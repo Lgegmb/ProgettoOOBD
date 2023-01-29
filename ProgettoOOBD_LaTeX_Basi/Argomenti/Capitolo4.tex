@@ -1,0 +1,265 @@
+\chapter{Progettazione Fisica}
+\section{Creazione delle Tabelle}
+\begin{lstlisting}
+drop schema mtl cascade;
+create schema mtl;
+
+create table mtl.author
+(
+    CodAuthor serial
+        primary key,
+    FName     varchar(20),
+    LName     varchar(20)
+);
+
+create table mtl.series
+(
+    ISSN_S  issn primary key,
+    Curator names,
+    Edition int,
+    Code_S  varchar(10),
+    Name_S  names
+);
+
+create table mtl.magazine
+(
+    ISSN_M            issn primary key,
+    Name_M            names,
+    Argument          names,
+    Manager           names,
+    YearRelease       timestamp,
+    PublicationPeriod names,
+    AccessMode        access,
+    PublishingHouse   names
+);
+
+create table mtl.book
+(
+    Doi_B            doi
+        primary key,
+    ISBN_B           varchar(13)
+        unique,
+    PublishingHouse  names,
+    Language         names,
+    AccessMode       access,
+    Title            varchar(30),
+    Argument         names,
+    Reprint          boolean,
+    Edition          int,
+    ReleaseDate      timestamp,
+    ReleaseLocation  location,
+    PresentationName names,
+    FK_Author        serial,
+    FK_Series        issn,
+
+    constraint BookFK_2 foreign key (Fk_Author) references mtl.Author (CodAuthor) on delete cascade,
+    constraint BookFK_3 foreign key (FK_Series) references mtl.Series (ISSN_S) on delete set null
+);
+
+create table mtl.article
+(
+    Doi_A           doi
+        primary key,
+    Title           varchar(40),
+    AccessMode      access,
+    YearRelease     timestamp,
+    Editor          names,
+    Topic           names,
+    ReleaseDate     timestamp,
+    ReleaseLocation location,
+    ConferenceName  varchar(50),
+    FK_Author       serial,
+    FK_Magazine     issn,
+
+    constraint ArticleFK_1 foreign key (FK_Author) references mtl.Author (CodAuthor) on delete cascade,
+    constraint ArticleFK_2 foreign key (FK_Magazine) references mtl.Magazine (ISSN_M) on delete set null
+);
+\end{lstlisting}
+\marginpar{Documentazione creazione delle \href{https://github.com/lorenzotecchia/ProgettoOOBD/blob/main/BD/Documentazione/DocumentazioneCodiceSQL.md#documentazione-codice-sql}{tabelle}.}
+
+\section{Creazione dei domini}
+\begin{lstlisting}
+	create domain issn as varchar(9)
+check ( value like '%-%' );
+
+create domain isbn as varchar(17)
+check ( value like '%-_-%-%-_');
+
+create domain doi as varchar(30)
+check ( value like'10.%/%');
+
+create domain access as varchar(20)
+check ( value <> '' and value not similar to '%[0-9]+%'
+        and value not similar to '%[@!#$ˆ∗%&]+%');
+
+create domain names as varchar(30)
+check ( value not similar to '%[@!#$ˆ∗%&]+%');
+
+create domain location as varchar(50)
+check ( value like '%,[0-9],%,[0-9],%');
+\end{lstlisting}
+
+\marginpar{Documentazione per la creazione dei \href{https://github.com/lorenzotecchia/ProgettoOOBD/blob/main/BD/Documentazione/DocumentazioneCodiceSQL.md#documentazione-del-file-domainssql}{domini}.}
+
+
+\section{Creazione delle viste}
+\begin{lstlisting}
+create view mtl.bibliography as
+select distinct b.Title,b.ReleaseDate,a.lname
+from mtl.book b join mtl.author a on b.fk_author = a.codauthor
+order by b.releasedate desc;
+
+create view mtl.history as
+select distinct a.fname, a.lname, ar.title,ar.yearrelease,ar.editor
+from mtl.author a join mtl.article ar on a.codauthor = ar.fk_author
+order by ar.yearrelease desc;
+
+create view mtl.digital_goods as
+select distinct b.title from mtl.book b where accessmode = 'Digital'
+union
+select distinct a.title from mtl.article a where accessmode = 'Digital'
+union
+select distinct m.name_m  from mtl.magazine m where accessmode = 'Digital'
+union
+select distinct s.name_s from mtl.series s join mtl.book b on s.issn_s = b.fk_series where b.accessmode='Digital';
+
+create view mtl.paper_goods as
+select distinct b.title from mtl.book b where accessmode = 'Paper'
+union
+select distinct a.title from mtl.article a where accessmode = 'Paper'
+union
+select distinct m.name_m  from mtl.magazine m where accessmode = 'Paper'
+union
+select distinct s.name_s from mtl.series s join mtl.book b on s.issn_s = b.fk_series where b.accessmode='Digital';
+
+create view mtl.audio_goods as
+select distinct b.title from mtl.book b where accessmode = 'Audio'
+union
+select distinct a.title from mtl.article a where accessmode = 'Audio'
+union
+select distinct m.name_m  from mtl.magazine m where accessmode = 'Audio'
+union
+select distinct s.name_s from mtl.series s join mtl.book b on s.issn_s = b.fk_series where b.accessmode='Digital';
+
+create view mtl.presentation as
+select b.title,a.fname,a.lname, b.presentationname, b.releaselocation, b.releasedate
+from mtl.book b join mtl.author a on a.codauthor = b.fk_author;
+
+create view mtl.discussion as
+select ar.title,a.fname,a.lname, ar.conferencename, ar.releaselocation, ar.releasedate
+from mtl.article ar join mtl.author a on a.codauthor = ar.fk_author
+order by a.lname;
+\end{lstlisting}
+
+\marginpar{Documentazione per la creazione delle \href{https://github.com/lorenzotecchia/ProgettoOOBD/blob/main/BD/Documentazione/DocumentazioneCodiceSQL.md#documentazione-del-file-viewssql}{viste}.}
+
+
+\section{Creazione di funzioni e trigger}
+\begin{lstlisting}
+	create or replace function mtl.function_1() returns trigger as
+$$
+declare
+    stringa_in   varchar(13) = new.isbn_b;
+    sum          integer     := 0;
+    var_appoggio integer;
+    resto        integer;
+begin
+    stringa_in := replace(stringa_in, '-', '');
+    for i in 1..13
+        loop
+            var_appoggio = cast(substring(stringa_in from i for 1) as int);
+            if (i % 2 = 0) then
+                sum := sum + var_appoggio * 3;
+            else
+                sum := sum + var_appoggio;
+            end if;
+        end loop;
+    resto = sum % 10;
+    if (resto != 0) then
+        delete from mtl.book where doi_b = new.doi_b;
+    end if;
+    return new;
+end
+$$
+    language plpgsql;
+
+create trigger validity_isbn
+    after insert
+    on mtl.book
+    for each row
+execute procedure mtl.function_1();
+
+create or replace function mtl.function_2() returns trigger as
+$$
+declare
+    stringa_in   varchar(13) = new.issn_s;
+    sum          integer     := 0;
+    var_appoggio integer;
+    resto        integer;
+begin
+    stringa_in := replace(stringa_in, '-', '');
+    for i in 1..8
+        loop
+            if substr(stringa_in, 8, 1) = 'X' then
+                sum = sum + 10;
+            end if;
+            var_appoggio = cast(substring(stringa_in from i for 1) as int);
+            if (i = 8) then
+                sum = sum + 0;
+            else
+                sum := sum + var_appoggio * (9 - i);
+            end if;
+        end loop;
+    resto = sum % 11;
+    if (resto != 0) then
+        delete from mtl.series where issn_s = new.issn_s;
+    end if;
+    return new;
+end
+$$
+    language plpgsql;
+
+create trigger validity_issn_s
+    after insert
+    on mtl.series
+    for each row
+execute procedure mtl.function_2();
+
+create or replace function mtl.function_3() returns trigger as
+$$
+declare
+    stringa_in   varchar(13) = new.issn_m;
+    sum          integer     := 0;
+    var_appoggio integer;
+    resto        integer;
+begin
+    stringa_in := replace(stringa_in, '-', '');
+    for i in 1..8
+        loop
+            if substr(stringa_in, 8, 1) = 'X' then
+                sum = sum + 10;
+            end if;
+            var_appoggio = cast(substring(stringa_in from i for 1) as int);
+            if (i = 8) then
+                sum = sum + 0;
+            else
+                sum := sum + var_appoggio * (9 - i);
+            end if;
+        end loop;
+    resto = sum % 11;
+    if (resto != 0) then
+        delete from mtl.magazine where issn_m = new.issn_m;
+    end if;
+    return new;
+end
+$$
+    language plpgsql;
+
+create trigger validity_issn_m
+    after insert
+    on mtl.magazine
+    for each row
+execute procedure mtl.function_3();
+\end{lstlisting}
+
+\marginpar{Documentazione per la creazione di \href{https://github.com/lorenzotecchia/ProgettoOOBD/blob/main/BD/Documentazione/DocumentazioneCodiceSQL.md#documentazione-del-file-functions_triggerssql}{funzioni.}}

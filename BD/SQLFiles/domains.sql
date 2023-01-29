@@ -15,4 +15,4 @@ create domain names as varchar(30)
 check ( value not similar to '%[@!#$ˆ∗%&]+%');
 
 create domain location as varchar(50)
-check ( value like '%,[0-9],%,[0-9],%');
+check ( value like '%,%,%,%,%');

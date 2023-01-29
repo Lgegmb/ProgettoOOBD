@@ -1,39 +1,83 @@
 package Model;
 
+import java.sql.Timestamp;
+
 public class Magazine {
 
-    private String doi_M;
-    private String title;
+    private String ISSN_M;
+    private String name_M;
+    private String argument;
+    private String manager;
+    private Timestamp yearRelease;
+    private String publicationPeriod;
+    private String publishingHouse;
     private String accessMode;
-    private String yearRelease;
-    private String editor;
-    private String author;
-    private String FK_Magazine;
+    private String FK_author;
 
-    public Magazine(String doi_M, String title, String accessMode, String yearRelease, String editor, String author, String FK_Magazine) {
-        this.doi_M = doi_M;
-        this.title = title;
-        this.accessMode = accessMode;
+    public Magazine(String ISSN_M, String name_M, String argument, String manager, Timestamp yearRelease, String publicationPeriod, String publishingHouse, String accessMode, String FK_author) {
+        this.ISSN_M = ISSN_M;
+        this.name_M = name_M;
+        this.argument = argument;
+        this.manager = manager;
         this.yearRelease = yearRelease;
-        this.editor = editor;
-        this.author = author;
-        this.FK_Magazine = FK_Magazine;
+        this.publicationPeriod = publicationPeriod;
+        this.publishingHouse = publishingHouse;
+        this.accessMode = accessMode;
+        this.FK_author = FK_author;
     }
 
-    public String getDoi_M() {
-        return doi_M;
+    public String getISSN_M() {
+        return ISSN_M;
     }
 
-    public void setDoi_M(String doi_M) {
-        this.doi_M = doi_M;
+    public void setISSN_M(String ISSN_M) {
+        this.ISSN_M = ISSN_M;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name_M;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name_M) {this.name_M = name_M;}
+
+    public String getArgument() {
+        return argument;
+    }
+
+    public void setArgument(String argument) {
+        this.argument = argument;
+    }
+
+    public String getManager() {
+        return manager;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
+    }
+
+    public Timestamp getYearRelease() {
+        return yearRelease;
+    }
+
+    public void setYearRelease(Timestamp yearRelease) {
+        this.yearRelease = yearRelease;
+    }
+
+    public String getPublicationPeriod() {
+        return publicationPeriod;
+    }
+
+    public void setPublicationPeriod(String publicationPeriod) {
+        this.publicationPeriod = publicationPeriod;
+    }
+
+    public String getPublishingHouse() {
+        return publishingHouse;
+    }
+
+    public void setPublishingHouse(String publishingHouse) {
+        this.publishingHouse = publishingHouse;
     }
 
     public String getAccessMode() {
@@ -44,35 +88,26 @@ public class Magazine {
         this.accessMode = accessMode;
     }
 
-    public String getYearRelease() {
-        return yearRelease;
+    public String getFK_author() {
+        return FK_author;
     }
 
-    public void setYearRelease(String yearRelease) {
-        this.yearRelease = yearRelease;
+    public void setFK_author(String FK_author) {
+        this.FK_author = FK_author;
     }
 
-    public String getEditor() {
-        return editor;
-    }
-
-    public void setEditor(String editor) {
-        this.editor = editor;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getFK_Magazine() {
-        return FK_Magazine;
-    }
-
-    public void setFK_Magazine(String FK_Magazine) {
-        this.FK_Magazine = FK_Magazine;
+    @Override
+    public String toString() {
+        return "Series{" +
+                "ISSN_S='" + ISSN_M + '\'' +
+                ", name_M='" + name_M + '\'' +
+                ", argument='" + argument + '\'' +
+                ", manager='" + manager + '\'' +
+                ", yearRelease='" + yearRelease + '\'' +
+                ", publicationPeriod='" + publicationPeriod + '\'' +
+                ", publishingHouse='" + publishingHouse + '\'' +
+                ", accessMode='" + accessMode + '\'' +
+                ", FK_author='" + FK_author + '\'' +
+                '}';
     }
 }

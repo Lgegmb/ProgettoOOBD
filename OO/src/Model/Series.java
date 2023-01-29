@@ -2,78 +2,68 @@ package Model;
 
 public class Series {
 
-    private String doi_S;
-    private String title;
-    private String accessMode;
-    private String yearRelease;
-    private String editor;
-    private String author;
-    private String FK_Magazine;
+    private String ISSN_S;
+    private String Curator;
+    private int Edition;
+    private String NameS;
+    private String Code;
 
-    public Series(String doi_S, String title, String accessMode, String yearRelease, String editor, String author, String FK_Magazine) {
-        this.doi_S = doi_S;
-        this.title = title;
-        this.accessMode = accessMode;
-        this.yearRelease = yearRelease;
-        this.editor = editor;
-        this.author = author;
-        this.FK_Magazine = FK_Magazine;
+    public Series(String ISSN_S, String Curator, int Edition, String NameS, String Code) {
+        this.ISSN_S = ISSN_S;
+        this.Curator = Curator;
+        this.Edition = Edition;
+        this.NameS = NameS;
+        this.Code = Code;
     }
 
-    public String getDoi_S() {
-        return doi_S;
+    public String getISSN_S() {
+        return ISSN_S;
     }
 
-    public void setDoi_S(String doi_S) {
-        this.doi_S = doi_S;
+    public void setISSN_S(String ISSN_S) {
+        this.ISSN_S = ISSN_S;
     }
 
-    public String getTitle() {
-        return title;
+    public String curator() {
+        return Curator;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCurator(String Curator) {
+        this.Curator = Curator;
     }
 
-    public String getAccessMode() {
-        return accessMode;
+    public int getEdition() {
+        return Edition;
     }
 
-    public void setAccessMode(String accessMode) {
-        this.accessMode = accessMode;
+    public void setAccessMode(int Edition) {
+        this.Edition = Edition;
     }
 
-    public String getYearRelease() {
-        return yearRelease;
+    public String getNameS() {
+        return NameS;
     }
 
-    public void setYearRelease(String yearRelease) {
-        this.yearRelease = yearRelease;
+    public void setNameS(String NameS) {
+        this.NameS = NameS;
     }
 
-    public String getEditor() {
-        return editor;
+    public String getCode() {
+        return Code;
     }
 
-    public void setEditor(String editor) {
-        this.editor = editor;
+    public void setCode(String Code) {
+        this.Code = Code;
     }
 
-    public String getAuthor() {
-        return author;
+    @Override
+    public String toString() {
+        return "Series{" +
+                "ISSN_S='" + ISSN_S + '\'' +
+                ", Curator='" + Curator + '\'' +
+                ", Edition='" + Edition + '\'' +
+                ", NameS='" + NameS + '\'' +
+                ", Code='" + Code + '\'' +
+                '}';
     }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getFK_Magazine() {
-        return FK_Magazine;
-    }
-
-    public void setFK_Magazine(String FK_Magazine) {
-        this.FK_Magazine = FK_Magazine;
-    }
-
 }

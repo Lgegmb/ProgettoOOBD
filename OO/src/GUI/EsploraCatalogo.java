@@ -77,6 +77,6 @@ public class EsploraCatalogo {
     }
 
     public static void main(String[] args) {
-        new EsploraCatalogo();
+
     }
 }
