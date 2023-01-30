@@ -15,5 +15,9 @@ public interface MagazineDAO {
 
     void delete(String ISSN_M);
 
-    ArrayList<Magazine> searchByName(String name_M);
+    ArrayList<Magazine> searchByMagazineName(String name_M);
+
+    ArrayList<Magazine> searchByMagazinePublicationPeriod(String publicationPeriod);
+
+    ArrayList<Magazine> getAllPeriodicities();
 }

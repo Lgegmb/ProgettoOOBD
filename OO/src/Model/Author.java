@@ -12,12 +12,12 @@ public class Author {
     /**
      * Instantiates a new Author.
      *
-     * @param authorID the author id
+     * @param codauthor the author id
      * @param fName    the f name
      * @param lName    the l name
      */
-    public Author(String authorID, String fName, String lName) {
-        this.codauthor = authorID;
+    public Author(String codauthor, String fName, String lName) {
+        this.codauthor = codauthor;
         this.fName = fName;
         this.lName = lName;
     }
@@ -27,17 +27,8 @@ public class Author {
      *
      * @return the author id
      */
-    public String getAuthorID() {
+    public String getCodauthor() {
         return codauthor;
-    }
-
-    /**
-     * Sets email.
-     *
-     * @param authorID the author id
-     */
-    public void setEmail(String authorID) {
-        this.codauthor = authorID;
     }
 
     /**
@@ -63,7 +54,7 @@ public class Author {
      *
      * @return the name
      */
-    public String getlName() {
+    public String getLName() {
         return lName;
     }
 
@@ -72,7 +63,7 @@ public class Author {
      *
      * @param lName the l name
      */
-    public void setlName(String lName) {
+    public void setLName(String lName) {
         this.lName = lName;
     }
 

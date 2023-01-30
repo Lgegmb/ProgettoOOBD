@@ -78,7 +78,7 @@ public class ImplementazioneSeries implements SeriesDAO {
 
 
     /**
-     * @param ISSN_S
+     * @param name_s
      * @return ArrayList of Series
      */
     @Override

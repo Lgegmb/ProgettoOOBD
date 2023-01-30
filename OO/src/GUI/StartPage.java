@@ -43,6 +43,7 @@ public class StartPage {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 frame.setVisible(false);
+
             }
         });
 

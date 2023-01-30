@@ -1,4 +1,10 @@
-insert into mtl.series(issn_s, curator, edition, code_s, name_s)
-VALUES  ('0000-0051', 'curator', 2, 'code', 'name');
-
-UPDATE mtl.series SET curator = 'curator', edition = 2, code_s = 'code', name_s = 'name' WHERE issn_s = '0000-0051';
+INSERT INTO mtl.series (issn_s, curator, edition, code_s, name_s) VALUES ('0000-3329', 'Ludovico Lanz', 3, '1', 'Introduction to physic theory');
+INSERT INTO mtl.series (issn_s, curator, edition, code_s, name_s) VALUES ('0000-3348', 'Andrea L. Lacaita', 1, '2', 'Applied electronic lessons');
+INSERT INTO mtl.series (issn_s, curator, edition, code_s, name_s) VALUES ('0000-0542', 'Remigio Ruggeri', 2, '3', 'Industrial logistic');
+INSERT INTO mtl.series (issn_s, curator, edition, code_s, name_s) VALUES ('0000-0554', 'Franco Cariati', 1, '4', 'Analityc chemistry lessons');
+INSERT INTO mtl.series (issn_s, curator, edition, code_s, name_s) VALUES ('0000-0564', 'National geographic channel', 1, '5', 'Grande Atlante');
+INSERT INTO mtl.series (issn_s, curator, edition, code_s, name_s) VALUES ('0000-0572', 'Mondadori', 1, '6', 'Piero Angela');
+INSERT INTO mtl.series (issn_s, curator, edition, code_s, name_s) VALUES ('0002-2535', 'J. K. Rowling', 1, '7', 'Harry Potter');
+INSERT INTO mtl.series (issn_s, curator, edition, code_s, name_s) VALUES ('0000-2578', 'Andrzej Sapkowski', 2, '8', 'The Witcher');
+INSERT INTO mtl.series (issn_s, curator, edition, code_s, name_s) VALUES ('0000-2584', 'Maya Jenkins', 4, '9', 'To the Lighthouse');
+INSERT INTO mtl.series (issn_s, curator, edition, code_s, name_s) VALUES ('0000-0604', 'Cassidy Glass', 3, '10', 'To the infinity and other');

@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The type Esplora catalogo.
+ */
 public class EsploraCatalogo {
     private JButton bookButton;
     private JButton seriesButton;
@@ -12,10 +15,14 @@ public class EsploraCatalogo {
     private JButton backButton;
     private JPanel panel1;
 
+    /**
+     * Instantiates a new Esplora catalogo.
+     */
     public EsploraCatalogo() {
         JFrame frame = new JFrame("EsploraCatalogo");
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(frame.getParent());
         frame.pack();
         frame.setVisible(true);
 
@@ -76,6 +83,11 @@ public class EsploraCatalogo {
         });
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
 
     }

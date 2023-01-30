@@ -2,7 +2,7 @@ package GUI;
 
 import ImplementazioneDAO.ImplementazioneAuthor;
 import Model.Author;
-
+import Controller.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -21,14 +21,12 @@ public class MainUI {
 
 
     public MainUI() {
+
         createTable();
         createGenreCombo();
         createTypeCombo();
-        
-//        for (Author author : authors) {
-//            System.out.println(author.getFName());
-//        }
-
+        Controller controller = new Controller();
+        ShowTable();
     }
 
 
@@ -36,31 +34,38 @@ public class MainUI {
         return rootPanel;
     }
 
+    private void ShowTable() {
+        DefaultTableModel model = (DefaultTableModel) table1.getModel();
+        model.setRowCount(0);
+        ImplementazioneAuthor implementazioneAuthor = new ImplementazioneAuthor();
+        ArrayList<Author> authors = implementazioneAuthor.readAll();
+        for (Author author : authors) {
+            model.addRow(new Object[]{author.getFName(), author.getLName(), author.getCodauthor()});
+        }
+    }
+
+
     private void createTable() {
-        Object[][] data = {
-                {"Inception", 2008, 9.0, 188},
-                {"Film_2", 1980, 8.8, 200},
-                {"Film_3", 2023, 9.2, 100}
-        };
-        table1.setModel(new DefaultTableModel(
-                data,
-                new String[]{"Titolo", "Year", "Rating", "NumVotes"}
-        ));
+
+
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Author Name");
+        model.addColumn("Author Surname");
+        model.addColumn("Author Code");
+        table1.setModel(model);
+
         TableColumnModel cols = table1.getColumnModel();
-        cols.getColumn(0).setMinWidth(250);
-        DefaultTableCellRenderer centerRender = new DefaultTableCellRenderer();
-        centerRender.setHorizontalAlignment(JLabel.CENTER);
-        cols.getColumn(1).setCellRenderer(centerRender);
-        cols.getColumn(2).setCellRenderer(centerRender);
-        cols.getColumn(3).setCellRenderer(centerRender);
+        cols.getColumn(0);
+        cols.getColumn(1);
+        cols.getColumn(2);
 
     }
 
     private void createGenreCombo() {
-        comboBox1.setModel(new DefaultComboBoxModel(new String[]{"Action", "Fantasy", "Drama"}));
+
     }
 
     private void createTypeCombo() {
-        comboBox2.setModel(new DefaultComboBoxModel(new String[]{"TvSeries", "Movie", "Short"}));
+
     }
 }
