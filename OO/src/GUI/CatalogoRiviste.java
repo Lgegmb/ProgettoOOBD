@@ -108,6 +108,7 @@ public class CatalogoRiviste {
      * Show table.
      */
     void ShowTable() {
+        
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         model.setRowCount(0);
         Controller controller = new Controller();
@@ -123,11 +124,11 @@ public class CatalogoRiviste {
      * Create combo box.
      */
     private void createComboBox() {
-        ArrayList<Magazine> periodicities = new ArrayList<>();
+        String[] periodicities;
         ImplementazioneMagazine implementazioneMagazine = new ImplementazioneMagazine();
-        periodicities = implementazioneMagazine.getAllPeriodicities();
-        for (Magazine magazine : periodicities) {
-            periodicitBox.addItem(magazine.getPublicationPeriod());
+        periodicities = implementazioneMagazine.getAllPeriodicities().toArray(new String[0]);
+        for (String i  : periodicities) {
+            periodicitBox.addItem(i);
         }
         periodicitBox.addItemListener(new ItemListener() {
             @Override

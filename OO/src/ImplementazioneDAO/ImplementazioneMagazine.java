@@ -73,8 +73,7 @@ public class ImplementazioneMagazine implements MagazineDAO {
                 String publicationPeriod = resultSet.getString("PublicationPeriod");
                 String publishingHouse = resultSet.getString("PublishingHouse");
                 String accessMode = resultSet.getString("AccessMode");
-                String FK_author = resultSet.getString("FK_author");
-                magazines.add(new Magazine(ISSN_M, name_M, argument, manager, yearRelease, publicationPeriod, publishingHouse, accessMode, FK_author));
+                magazines.add(new Magazine(ISSN_M, name_M, argument, manager, yearRelease, publicationPeriod, publishingHouse, accessMode));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -130,7 +129,7 @@ public class ImplementazioneMagazine implements MagazineDAO {
                 String publishingHouse = resultSet.getString("PublishingHouse");
                 String accessMode = resultSet.getString("AccessMode");
                 String FK_author = resultSet.getString("FK_author");
-                magazines.add(new Magazine(ISSN_M, name_M, argument, manager, yearRelease, publicationPeriod, publishingHouse, accessMode, FK_author));
+                magazines.add(new Magazine(ISSN_M, name_M, argument, manager, yearRelease, publicationPeriod, publishingHouse, accessMode));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -154,7 +153,7 @@ public class ImplementazioneMagazine implements MagazineDAO {
                 String publishingHouse = resultSet.getString("PublishingHouse");
                 String accessMode = resultSet.getString("AccessMode");
                 String FK_author = resultSet.getString("FK_author");
-                magazines.add(new Magazine(ISSN_M, name_M, argument, manager, yearRelease, publicationPeriod, publishingHouse, accessMode, FK_author));
+                magazines.add(new Magazine(ISSN_M, name_M, argument, manager, yearRelease, publicationPeriod, publishingHouse, accessMode));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -166,21 +165,13 @@ public class ImplementazioneMagazine implements MagazineDAO {
      * @return
      */
     @Override
-    public ArrayList<Magazine> getAllPeriodicities() {
-        ArrayList<Magazine> perioditcita = new ArrayList<>();
+    public ArrayList<String> getAllPeriodicities() {
+        ArrayList<String> perioditcita = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement(GET_ALL_PERIODICITIES)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                String ISSN_M = resultSet.getString("ISSN_M");
-                String name_M = resultSet.getString("Name_M");
-                String argument = resultSet.getString("Argument");
-                String manager = resultSet.getString("Manager");
-                Timestamp yearRelease = Timestamp.valueOf(resultSet.getString("YearRelease"));
                 String publicationPeriod = resultSet.getString("PublicationPeriod");
-                String publishingHouse = resultSet.getString("PublishingHouse");
-                String accessMode = resultSet.getString("AccessMode");
-                String FK_author = resultSet.getString("FK_author");
-                perioditcita.add(new Magazine(ISSN_M, name_M, argument, manager, yearRelease, publicationPeriod, publishingHouse, accessMode, FK_author));
+                perioditcita.add(publicationPeriod);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

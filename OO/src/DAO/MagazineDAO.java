@@ -19,5 +19,5 @@ public interface MagazineDAO {
 
     ArrayList<Magazine> searchByMagazinePublicationPeriod(String publicationPeriod);
 
-    ArrayList<Magazine> getAllPeriodicities();
+    ArrayList<String> getAllPeriodicities();
 }

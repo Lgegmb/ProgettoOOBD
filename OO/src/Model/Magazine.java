@@ -14,7 +14,8 @@ public class Magazine {
     private String accessMode;
     private String FK_author;
 
-    public Magazine(String ISSN_M, String name_M, String argument, String manager, Timestamp yearRelease, String publicationPeriod, String publishingHouse, String accessMode, String FK_author) {
+    public Magazine(String ISSN_M, String name_M, String argument, String manager,
+                    Timestamp yearRelease, String publicationPeriod, String publishingHouse, String accessMode) {
         this.ISSN_M = ISSN_M;
         this.name_M = name_M;
         this.argument = argument;
@@ -23,7 +24,6 @@ public class Magazine {
         this.publicationPeriod = publicationPeriod;
         this.publishingHouse = publishingHouse;
         this.accessMode = accessMode;
-        this.FK_author = FK_author;
     }
 
     public String getISSN_M() {
@@ -38,7 +38,9 @@ public class Magazine {
         return name_M;
     }
 
-    public void setName(String name_M) {this.name_M = name_M;}
+    public void setName(String name_M) {
+        this.name_M = name_M;
+    }
 
     public String getArgument() {
         return argument;

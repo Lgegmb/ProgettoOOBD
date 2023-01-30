@@ -88,13 +88,20 @@ begin
     stringa_in := replace(stringa_in, '-', '');
     for i in 1..8
         loop
+        raise notice 'i: %', i;
             if substr(stringa_in, 8, 1) = 'X' then
                 sum = sum + 10;
-            end if;
-            var_appoggio = cast(substring(stringa_in from i for 1) as int);
-            if (i = 8) then
-                sum = sum + 0;
+                raise notice 'sum: %', sum;
+                var_appoggio = cast(substring(stringa_in from i for 1) as int);
+                if (i = 8) then
+                    sum = sum + 0;
+                    raise notice 'sum: %', sum;
+                else
+                    sum := sum + var_appoggio * (9 - i);
+                    raise notice 'sum: %', sum;
+                end if;
             else
+                var_appoggio = cast(substring(stringa_in from i for 1) as int);
                 sum := sum + var_appoggio * (9 - i);
             end if;
         end loop;
@@ -112,6 +119,3 @@ create trigger validity_issn_m
     on mtl.magazine
     for each row
 execute procedure mtl.function_3();
-
-
-<
