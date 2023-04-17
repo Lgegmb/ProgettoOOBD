@@ -1,7 +1,10 @@
-# Progetto Basi di Dati e Object Orientation
+# Questa repository è ormai un archivio.
+
+
+## Progetto Basi di Dati e Object Orientation
 
 ---
-# Biblioteca Marciano-Tecchia <img src="icona.png" align="center"/> 
+## Biblioteca Marciano-Tecchia <img src="icona.png" align="center"/> 
 
 ## Object Orientation
 
